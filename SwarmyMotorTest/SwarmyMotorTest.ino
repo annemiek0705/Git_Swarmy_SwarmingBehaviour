@@ -12,19 +12,19 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  bot.OLEDprint("Index = 0", "Speed = 255", "");
-  bot.setMotorSpeed(0, 255);
+  bot.OLEDprint("Motortest", "Linker Motor vooruit", "Index 0, Speed 100");
+  bot.setMotorSpeed(0, 100);
   bot.setMotorSpeed(1, 0);
-  delay(10000);
+  delay(1000);
 
-  delay(10000);
-  bot.OLEDprint("Index = 1", "Speed = 255", "");
-  bot.setMotorSpeed(1, 255);
+  bot.OLEDprint("Motortest", "Rechter motor vooruit", "Index 1, Speed 100");
   bot.setMotorSpeed(0, 0);
-  delay(10000);
-  bot.OLEDprint("Index = both", "Speed = 255", "");
-  bot.setMotorSpeed(1, 255);
-  bot.setMotorSpeed(0, 255);
-  delay(10000);
+  bot.setMotorSpeed(1, 100);
+  delay(1000);
+
+  bot.OLEDprint("Motortest", "Beide motoren", "Speed 100");
+  bot.setMotorSpeed(0, 100);
+  bot.setMotorSpeed(1, 100);
+  delay(1000);
   
 }
