@@ -15,26 +15,26 @@ void loop() {
   bot.OLEDprint("Motortest", "Draai naar links", "Index 0, Speed 100");
   bot.setMotorSpeed(0, 100);
   bot.setMotorSpeed(1, 0);
-  delay(50);
+  delay(1000);
   bot.setMotorSpeed(0, 100);
-  bot.setMotorSpeed(1, 100);
+  bot.setMotorSpeed(1, -100);
   delay(1000);
 
   bot.OLEDprint("Motortest", "Draai naar rechts", "Index 1, Speed 100");
   bot.setMotorSpeed(0, 0);
-  bot.setMotorSpeed(1, 100);
-  delay(50);
+  bot.setMotorSpeed(1, -100);
+  delay(2000);
   bot.setMotorSpeed(0, 100);
-  bot.setMotorSpeed(1, 100);
+  bot.setMotorSpeed(1, -100);
   delay(1000);
 
   bot.OLEDprint("Motortest", "Beide motoren vooruit", "Speed 100");
   bot.setMotorSpeed(0, 100);
-  bot.setMotorSpeed(1, 100);
+  bot.setMotorSpeed(1, -100);
   delay(1000);
   
   bot.OLEDprint("Motortest", "Beide motoren achteruit", "Speed 100");
   bot.setMotorSpeed(0, -100);
-  bot.setMotorSpeed(1, -100);
+  bot.setMotorSpeed(1, 100);
   delay(1000);
 }
