@@ -22,9 +22,9 @@ void loop() {
     amplitude[i] = bot.getAmplitude(i);
     frequency[i] = bot.getFrequency(i);
   }
-  String ampStr = "Amplitude| 0: "+ String(amplitude[0])+ "1:"+String(amplitude[1])+ "2:"+String(amplitude[2])+"3:"+ String(amplitude[3])+"4:"+String(amplitude[4])+"5:"+String(amplitude[5])+"6:"+String(amplitude[6])+"7:"+String(amplitude[7]) ;
-  String freqStr = "Frequency| 0: " + String(frequency[0])+ "1:"+String(frequency[1])+ "2:"+String(frequency[2])+"3:"+String(frequency[3])+"4:"+String(frequency[4])+"5:"+String(frequency[5])+"6:"+String(frequency[6])+"7:"+String(frequency[7]) ;
-  
-  bot.OLEDprint(ampStr, freqStr, "");
+  String firstStr = String(amplitude[0])+ ":"+String(frequency[0])+ " "+String(amplitude[1])+ ":"+String(frequency[1])+" "+ String(amplitude[2])+":"+String(frequency[2]);
+  String secondStr = String(amplitude[3])+":"+String(frequency[3])+" "+String(amplitude[4])+":"+String(frequency[4])+" "+String(amplitude[5])+":"+String(frequency[5]);
+  String thirdStr = String(amplitude[6])+":"+String(frequency[6])+ " "+String(amplitude[7])+":"+String(frequency[7]);
+  bot.OLEDprint(firstStr, secondStr, thirdStr);
   delay(500);
 }
