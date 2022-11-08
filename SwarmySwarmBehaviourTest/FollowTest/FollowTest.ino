@@ -4,8 +4,8 @@
 Swarmy bot(false);
 typedef enum{Searching, Following}states;
 states state = Searching;
-int amplitude[8], frequency[8] ,initFreq[8], initAmp[8];
-bool arrayCopied = 0;
+int amplitude[8], frequency[8] ,foundFreq[8], initAmp[8];
+bool swarmyFound = 0;
 void setup() {
   // put your setup code here, to run once:
   bot.OLEDprint("", "Starting", "");
@@ -17,22 +17,25 @@ void loop() {
     case Searching:
      bot.OLEDprint("", "Searching", "");
       if(receiveIR()==1000){
-        if(arrayCopied == 0){
-          copyArray();
-          arrayCopied = 1;
-          bot.OLEDprint(String(initFreq[0])+" " + String(initFreq[1])+" "+ String(initFreq[2]), String(initFreq[3])+" "+ String(initFreq[4])+ " "+String(initFreq[5]),String(initFreq[6])+" "+String(initFreq[7]));
+        if(swarmyFound == 0){
+          swarmyFound = 1;
           state = Following;  
+          bot.OLEDprint(String(frequency[0])+" " + String(frequency[1])+" "+ String(frequency[2]), String(frequency[3])+" "+ String(frequency[4])+ " "+String(frequency[5]),String(frequency[6])+" "+String(frequency[7]));
+    
         }
       }
     break;
     
     case Following:
-      bot.OLEDprint("", "Following", "");
+     // bot.OLEDprint("", "Following", "");
+      adjustDirection(determineDirection());
       if(receiveIR()!=1000){
-        arrayCopied = 0;
+        swarmyFound = 0;
         state = Searching;  
       }
-    break;
+      //bot.OLEDprint(String(foundFreq[0])+" " + String(foundFreq[1])+" "+ String(foundFreq[2]), String(foundFreq[3])+" "+ String(foundFreq[4])+ " "+String(foundFreq[5]),String(foundFreq[6])+" "+String(foundFreq[7]));
+          
+      break;
   }
 }
 
@@ -49,13 +52,39 @@ int receiveIR(){
   }
   return freqFound;
 }
-void copyArray(){
-  for(int i; i<7; i++){
-    initFreq[i] = frequency[i];
-    initAmp[i] = amplitude[i];
+
+
+int determineDirection(){
+  int totalFreq = 0;
+  for(int i = 0; i < 8;i++){
+    Serial.println(foundFreq[i]);
+    if(i > 0 && i < 4 && frequency[i]>500){//right
+      totalFreq += -1;
+    }else if(i == 4 && frequency[i]>500){//backward
+      totalFreq += 10;
+    }else if(i>4 && i<8 && frequency[i]>500){ //left
+      totalFreq += 1;
+    }else if(i ==0 && frequency[i]>500){//front
+      totalFreq += 0;
+    }
+    
+    Serial.println(totalFreq);
   }
+  return totalFreq;    
 }
 
-void determineDirection(){
-    
+void adjustDirection(int totalFreq){
+  if(totalFreq>0){
+    bot.OLEDprint("", "Swarmy to the left", "");
+    bot.setMotorSpeed(0, 0);
+    bot.setMotorSpeed(1, 100);  
+  }else if(totalFreq<0){
+    bot.OLEDprint("","Swarmy to the right","");
+    bot.setMotorSpeed(0, 100);
+    bot.setMotorSpeed(1, 0);  
+  }else if(totalFreq == 0){
+    bot.OLEDprint("", "Swarmy to the front", "");
+    bot.setMotorSpeed(0, 0);
+    bot.setMotorSpeed(1, 0); 
+  }
 }
