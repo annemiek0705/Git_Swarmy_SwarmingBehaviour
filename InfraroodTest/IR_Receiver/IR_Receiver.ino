@@ -39,6 +39,7 @@ void postRequest(String title){
   if ( WiFi.status() == WL_CONNECTED) {
     String contentType = "application/json";
     DynamicJsonDocument doc(1024);
+    doc["Title"] = "InfraroodTest_Step3";
     doc["amp0"] = String(amplitude[0]);   doc["amp1"] = String(amplitude[1]);   doc["amp2"] = String(amplitude[2]);   doc["amp3"] = String(amplitude[3]); 
     doc["amp4"] = String(amplitude[4]);   doc["amp5"] = String(amplitude[5]);   doc["amp6"] = String(amplitude[6]);   doc["amp7"] = String(amplitude[7]);
     doc["freq0"] = String(frequency[0]);  doc["freq1"] = String(frequency[1]);  doc["freq2"] = String(frequency[2]);  doc["freq3"] = String(frequency[3]); 
