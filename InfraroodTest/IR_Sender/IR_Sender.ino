@@ -6,7 +6,7 @@ Swarmy bot(false);
 void setup() {
   // put your setup code here, to run once:
   bot.OLEDprint("", "Waking up", "");
-  Serial.begin(115200);
+  //Serial.begin(115200);
 }
 
 void loop() {
