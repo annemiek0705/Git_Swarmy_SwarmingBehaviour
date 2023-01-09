@@ -11,6 +11,6 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  bot.setInfraredFrequency(1000);
-  bot.OLEDprint("", "Frequency : 1000", "");
+  bot.setInfraredFrequency(9000);
+  bot.OLEDprint("", "Frequency: "+String(bot.getFrequency(1)), "");
 }
